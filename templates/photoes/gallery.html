@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/mdb.css' %}">
+    <!-- <style>
+        .image-thumbail {
+            height: 220px;
+            object-fit: cover;
+        }
+
+
+        body {
+            background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+        }
+
+        .container-fluid{
+            background-color: cyan;
+            
+        }
+
+        .container-fluid>.row>.col-sm-3>.card {
+            margin-top: 80px;
+            
+        }
+
+        .container-fluid>.row>.col-sm-3>.card>ul>li {
+            padding: 20px;
+        }
+    </style> -->
+</head>
+<body class="">
+    <div class="container-fluid">
+        <div class="row">
+            <div id="" class="col-sm-3">
+
+                
+                    <div class="card m-3">
+                        <div class="card-header px-3">Categories</div>
+                        <ul class="list-group list-group-light list-group-small">
+                            <li class="list-group-item px-3">
+                                <a href="{% url 'gallery' %}">All</a>
+                            </li>
+
+                                {% for category in categories %}
+
+                                    <li class="list-group-item px-3">
+                                        <a href="{% url 'gallery' %}?category={{category.name}}">{{category.name}}</a>
+                                    </li>
+
+                                {% endfor %}
+
+                            <a href="{% url 'add' %}" class="btn btn-dark btn-sm m-1">Add photo</a>
+
+                        </ul>
+                    </div>
+            </div>
+
+            
+            <div class="col-sm-9">
+                    <div class="row m-3">
+
+                        {% for photo in photos %}
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img class="image-thumbail" src="{{photo.image.url}}"/>
+
+                                <div class="card-body">
+                                    <small>Category: {{photo.category.name}}</small>
+                                </div>
+                                <a href="{% url 'photo' photo.id %}" class="btn btn-outline-dark btn-sm m-1">View</a>
+
+
+
+                                <!-- <a href="{% url 'deletePhoto' photo.id %}" class="btn btn-outline-dark btn-sm m-1">Delete</a> -->
+
+
+
+                            </div>
+                        </div>
+                        {% empty %}
+                        <h3>No photos ......</h3>
+                        {% endfor %}
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/mdb.js' %}"></script>
+</body>
+</html>
